@@ -42,6 +42,9 @@ pip install -r requirements.txt
 
 # Run the application
 python -m app.main
+
+# Test Result on Local
+http://localhost:8000
 ```
 
 ## License
