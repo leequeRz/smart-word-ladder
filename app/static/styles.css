@@ -1,0 +1,744 @@
+:root {
+  --primary-cream: #f5e6d3;
+  --secondary-cream: #e8d5b7;
+  --accent-brown: #8b6f47;
+  --text-dark: #3c2f2f;
+  --text-light: #6b5b5b;
+  --success-green: #7fb069;
+  --error-red: #e07a5f;
+  --bg-light: #faf6f1;
+  --shadow: rgba(139, 111, 71, 0.1);
+}
+
+.dark-mode {
+  --primary-cream: #3c2f2f;
+  --secondary-cream: #4a3d3d;
+  --accent-brown: #d4af87;
+  --text-dark: #f5e6d3;
+  --text-light: #e8d5b7;
+  --success-green: #90c97a;
+  --error-red: #ff8c6b;
+  --bg-light: #2b2323;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .mode-button,
+.dark-mode .difficulty-button {
+  background: var(--secondary-cream);
+  border-color: var(--accent-brown);
+  color: var(--text-dark);
+}
+
+.dark-mode .mode-button:hover,
+.dark-mode .difficulty-button:hover {
+  background: var(--accent-brown);
+  color: var(--text-dark);
+  border-color: var(--primary-cream);
+}
+
+* {
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--secondary-cream);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 12px var(--shadow);
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Welcome screen styles */
+.welcome-screen,
+.mode-screen,
+.difficulty-screen {
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+}
+
+.screen.active {
+  display: block;
+}
+
+.game-title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  background: linear-gradient(45deg, var(--accent-brown), var(--text-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--text-light);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.big-button {
+  background: var(--accent-brown);
+  color: white;
+  border: none;
+  padding: 20px 60px;
+  font-size: 1.8rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 6px 20px var(--shadow);
+  display: block;
+  margin: 2rem auto;
+}
+
+.big-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px var(--shadow);
+  background: var(--text-dark);
+}
+
+.big-button:active {
+  transform: translateY(0);
+}
+
+/* Mode selection styles */
+.mode-buttons {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.mode-button {
+  background: var(--secondary-cream);
+  border: 3px solid var(--accent-brown);
+  padding: 30px;
+  width: 200px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.mode-button:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px var(--shadow);
+  background: var(--accent-brown);
+  color: white;
+}
+
+.mode-button h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.mode-button p {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Difficulty selection styles */
+.difficulty-buttons {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.difficulty-button {
+  background: var(--secondary-cream);
+  border: 4px solid var(--accent-brown);
+  padding: 40px 60px;
+  border-radius: 25px;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.difficulty-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.difficulty-button:hover::before {
+  left: 100%;
+}
+
+.difficulty-button:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 35px var(--shadow);
+  background: var(--accent-brown);
+  color: white;
+  border-color: var(--text-dark);
+}
+
+.difficulty-button h3 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.difficulty-description {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Game container styles */
+/* Timer positioned at top-right of game container */
+.timer-top-right {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  text-align: center;
+  padding: 15px;
+  background: rgba(255, 68, 68, 0.1);
+  border-radius: 12px;
+  border: 2px solid #ff4444;
+  min-width: 120px;
+  z-index: 10;
+}
+
+/* Make game-container relative for absolute positioning */
+.game-container {
+  position: relative;
+  background: var(--primary-cream);
+  border-radius: 20px;
+  padding: 30px;
+  margin-top: 30px;
+  box-shadow: 0 8px 24px var(--shadow);
+  animation: fadeIn 0.5s ease;
+}
+
+/* Update existing timer styles */
+#timer-display.timer-top-right {
+  text-align: center;
+  padding: 15px;
+  background: rgba(255, 68, 68, 0.1);
+  border-radius: 12px;
+  border: 2px solid #ff4444;
+}
+
+#timer-display.timer-top-right #display-time-left {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation for time warning */
+#timer-display.timer-top-right.warning {
+  animation: pulse 1s infinite;
+}
+
+.word-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 30px 0;
+  animation: slideUp 0.5s ease;
+}
+
+.word-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.letter-cell {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  border-radius: 15px;
+  background: var(--secondary-cream);
+  color: var(--text-dark);
+  box-shadow: 0 4px 8px var(--shadow);
+  animation: popIn 0.3s ease;
+}
+
+.letter-cell.changed {
+  animation: bounceIn 0.5s ease;
+}
+
+.letter-cell.matched-target {
+  background: var(--success-green);
+  color: white;
+  transform: scale(1.05);
+}
+
+.letter-cell.target {
+  background: var(--accent-brown);
+  color: white;
+  box-shadow: 0 6px 12px var(--shadow);
+}
+
+.letter-cell.current {
+  border: 3px solid var(--accent-brown);
+  box-shadow: 0 6px 16px var(--shadow);
+}
+
+input,
+select,
+button {
+  padding: 15px 20px;
+  margin: 8px 0;
+  border-radius: 12px;
+  border: 2px solid var(--secondary-cream);
+  background: white;
+  color: var(--text-dark);
+  font-size: 16px;
+}
+
+.dark-mode input,
+.dark-mode select,
+.dark-mode button {
+  background: var(--secondary-cream);
+  color: var(--text-dark);
+  border-color: var(--accent-brown);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent-brown);
+  box-shadow: 0 0 0 3px rgba(139, 111, 71, 0.2);
+}
+
+button {
+  background: var(--accent-brown);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  background: var(--text-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px var(--shadow);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.error {
+  color: var(--error-red);
+  font-weight: 600;
+  animation: shake 0.5s ease;
+}
+
+.game-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.game-info div {
+  background: var(--secondary-cream);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 8px var(--shadow);
+}
+
+.game-info div:hover {
+  transform: translateY(-5px);
+}
+
+h1,
+h2 {
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.5em;
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+.input-group {
+  margin-bottom: 25px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: var(--primary-cream);
+  margin: 10% auto;
+  padding: 40px;
+  border-radius: 25px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.5s ease;
+}
+
+.congrats-message {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--success-green);
+  margin: 20px 0;
+  animation: pulse 2s infinite;
+}
+
+.confirmation-message {
+  font-size: 18px;
+  margin: 20px 0;
+  color: var(--text-dark);
+}
+
+.confirmation-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.confirm-button {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.confirm-yes {
+  background: var(--error-red);
+  color: white;
+}
+
+.confirm-yes:hover {
+  background: #c56652;
+  transform: translateY(-2px);
+}
+
+.confirm-no {
+  background: var(--secondary-cream);
+  color: var(--text-dark);
+  border: 2px solid var(--accent-brown);
+}
+
+.confirm-no:hover {
+  background: var(--accent-brown);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.stats {
+  background: var(--secondary-cream);
+  padding: 25px;
+  border-radius: 15px;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.stats p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--secondary-cream);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 12px var(--shadow);
+  z-index: 1000;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+  background: var(--accent-brown);
+  color: white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Celebration Animation */
+.celebration {
+  position: fixed;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--accent-brown);
+  animation: confetti-fall 3s linear;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 3rem;
+  }
+
+  .mode-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .difficulty-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mode-button {
+    width: 250px;
+  }
+
+  .difficulty-button {
+    width: 250px;
+    padding: 30px 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .letter-cell {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .game-info {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    margin: 20% auto;
+    padding: 20px;
+  }
+}
+
+/* Timer styles */
+#timer-display {
+  text-align: center;
+  padding: 10px;
+  background: rgba(255, 68, 68, 0.1);
+  border-radius: 8px;
+  border: 2px solid #ff4444;
+}
+
+#display-time-left {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation for time warning */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#timer-display.warning {
+  animation: pulse 1s infinite;
+}

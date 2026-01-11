@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Word Ladder</title>
+    <link rel="stylesheet" href="static/styles.css" />
+  </head>
+
+  <body>
+    <button class="theme-toggle" id="theme-toggle-btn">🌓</button>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen active">
+      <h1 class="game-title">Word Ladder</h1>
+      <p class="subtitle">
+        Transform one word into another, one letter at a time.
+      </p>
+      <button class="big-button" id="start-game-btn">Start Game</button>
+    </div>
+
+    <!-- Mode Selection Screen -->
+    <div id="mode-screen" class="screen">
+      <button class="back-button" id="back-from-mode-btn">↩</button>
+      <h1>Choose Game Mode</h1>
+      <div class="mode-buttons">
+        <div class="mode-button" id="mode-classic">
+          <h3>Classic</h3>
+          <p>Take your time to find the perfect path</p>
+        </div>
+        <div class="mode-button" id="mode-timed">
+          <h3>Timed</h3>
+          <p>Race against the clock</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Difficulty Selection Screen -->
+    <div id="difficulty-screen" class="screen">
+      <button class="back-button" id="back-from-difficulty-btn">↩</button>
+      <h1>Select Difficulty</h1>
+      <div class="difficulty-buttons">
+        <div class="difficulty-button" id="diff-easy">
+          <h3>Easy</h3>
+          <div class="difficulty-description">4-letter words</div>
+        </div>
+        <div class="difficulty-button" id="diff-medium">
+          <h3>Medium</h3>
+          <div class="difficulty-description">5-letter words</div>
+        </div>
+        <div class="difficulty-button" id="diff-hard">
+          <h3>Hard</h3>
+          <div class="difficulty-description">5-letter challenges</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Container -->
+    <div id="game-container" class="screen">
+      <div class="game-container">
+        <button class="back-button" id="back-from-game-btn">↩</button>
+        <h2>Word Ladder Challenge</h2>
+        
+        <!-- ย้าย timer display มาไว้ที่นี่ -->
+        <div id="timer-display" class="timer-top-right" style="display: none">
+          <strong>Time Left:</strong><br />
+          <span id="display-time-left" style="font-size: 24px; color: #ff4444">05:00</span>
+        </div>
+    
+        <div class="game-info">
+          <div>
+            <strong>Start Word:</strong><br />
+            <span id="display-start-word" style="font-size: 24px"></span>
+          </div>
+          <div>
+            <strong>Target Word:</strong><br />
+            <span id="display-target-word" style="font-size: 24px"></span>
+          </div>
+          <div>
+            <strong>Current Word:</strong><br />
+            <span id="display-current-word" style="font-size: 24px"></span>
+          </div>
+          <div>
+            <strong>Moves:</strong><br />
+            <span id="display-moves-count" style="font-size: 24px">0</span>
+          </div>
+          <!-- ลบ timer display ออกจากที่นี่ -->
+        </div>
+        
+        <div class="word-grid" id="word-grid">
+          <!-- Word grid will be displayed here -->
+        </div>
+
+        <div class="input-group" id="word-input-group">
+          <label for="next-word">Enter your next word:</label>
+          <input type="text" id="next-word" />
+          <button id="submit-move-btn">Submit</button>
+        </div>
+
+        <div class="input-group" id="hint-group">
+          <button id="get-hint-btn">Get Hint</button>
+          <p id="hint-text"></p>
+        </div>
+
+        <p id="game-message"></p>
+        <p id="game-error" class="error"></p>
+      </div>
+    </div>
+
+    <!-- Congratulations Modal -->
+    <div id="congrats-modal" class="modal">
+      <div class="modal-content">
+        <h2>🎉 Congratulations! 🎉</h2>
+        <p class="congrats-message">You solved the Word Ladder!</p>
+        <div class="stats">
+          <p>
+            <strong>Start Word:</strong> <span id="modal-start-word"></span>
+          </p>
+          <p>
+            <strong>Target Word:</strong> <span id="modal-target-word"></span>
+          </p>
+          <p>
+            <strong>Total Moves:</strong> <span id="modal-moves-count"></span>
+          </p>
+          <p><strong>Your Path:</strong> <span id="modal-path"></span></p>
+        </div>
+        <button id="restart-btn">Play Again</button>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal">
+      <div class="modal-content">
+        <h2>⚠️ Exit Game?</h2>
+        <p class="confirmation-message">
+          Are you sure you want to exit the game? Your progress will not be
+          saved.
+        </p>
+        <div class="confirmation-buttons">
+          <button id="confirm-yes-btn" class="confirm-button confirm-yes">
+            Yes, Exit
+          </button>
+          <button id="confirm-no-btn" class="confirm-button confirm-no">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="celebration" class="celebration"></div>
+
+    <script src="static/game-script.js"></script>
+  </body>
+</html>
